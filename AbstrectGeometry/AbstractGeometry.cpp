@@ -174,6 +174,7 @@ public:
 		cout << "Периметр:\t" << get_perimeter() << endl;
 	}
 };
+
 class Circle:public Shape {
 protected:
 	double radius;
@@ -190,10 +191,10 @@ public:
 	}
 	~Circle() {}
 
-	double get_area() {
+	double get_area() const override {
 		return 2 * Pi * pow(radius, 2);
 	}
-	double get_perimeter() {
+	double get_perimeter() const override {
 		return 2 * Pi * radius;
 	}
 
@@ -251,14 +252,14 @@ public:
 		set_side_a(side_a);
 		set_side_b(side_b);
 		set_side_c(side_c);
+		semiperimeter = (get_side_a() + get_side_b() + get_side_c()) / 2;
 	}
 	~Triagle() {}
 
-	double get_area() {
-		semiperimeter = (get_side_a() + get_side_b() + get_side_c()) / 2;
+	double get_area()const override {
 		return sqrt(semiperimeter * ((semiperimeter * get_side_a()) * (semiperimeter * get_side_b()) * (semiperimeter * get_side_c())));
 	}
-	double get_perimeter() {
+	double get_perimeter()const override {
 		return get_side_a() + get_side_b() + get_side_b();
 	}
 
@@ -296,6 +297,7 @@ int main() {
 	class Rectangle rect(200, 150, Color::blue, 200, 450, 5);
 	rect.draw();
 
+	Triagle triagle(15, 5, 5, Color::blue, 200, 450, 5);
 
 
 	return 0;
