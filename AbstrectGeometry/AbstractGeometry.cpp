@@ -174,7 +174,7 @@ public:
 		cout << "Периметр:\t" << get_perimeter() << endl;
 	}
 };
-class Sphare:public Shape {
+class Circle:public Shape {
 protected:
 	double radius;
 public:
