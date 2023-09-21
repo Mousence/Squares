@@ -220,7 +220,7 @@ public:
 		cout << "Радиус: " << get_radius() << endl;
 	}
 };
-class Trinagle :public Shape {
+class Triagle :public Shape {
 protected:
 	double side_a;
 	double side_b;
@@ -247,12 +247,12 @@ public:
 		this->side_c = side_c;
 	}
 
-	Trinagle(double side_a, double side_b, double side_c, SHAPE_TAKE_PARAMETERS) :Shape(SHAPE_GIVE_PARAMETERS) {
+	Triagle(double side_a, double side_b, double side_c, SHAPE_TAKE_PARAMETERS) :Shape(SHAPE_GIVE_PARAMETERS) {
 		set_side_a(side_a);
 		set_side_b(side_b);
 		set_side_c(side_c);
 	}
-	~Trinagle() {}
+	~Triagle() {}
 
 	double get_area() {
 		semiperimeter = (get_side_a() + get_side_b() + get_side_c()) / 2;
