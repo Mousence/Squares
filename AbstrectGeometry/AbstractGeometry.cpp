@@ -185,10 +185,10 @@ public:
 		if (radius < 1) radius = 1;
 		this->radius = radius;
 	}
-	Sphare(double radius, SHAPE_TAKE_PARAMETERS) :Shape(SHAPE_GIVE_PARAMETERS) {
+	Circle(double radius, SHAPE_TAKE_PARAMETERS) :Shape(SHAPE_GIVE_PARAMETERS) {
 		set_radius(radius);
 	}
-	~Sphare() {}
+	~Circle() {}
 
 	double get_area() {
 		return 2 * Pi * pow(radius, 2);
