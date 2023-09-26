@@ -401,6 +401,83 @@ public:
 		Triangle::info();
 	}
 };
+class Parallelogram : public Shape {
+	double side_a;
+	double side_b;
+public:
+	Parallelogram(double side_a, double side_b, SHAPE_TAKE_PARAMETERS) : Shape(SHAPE_GIVE_PARAMETERS) {
+		set_side_a(side_a);
+		set_side_b(side_b);
+	}
+
+	~Parallelogram() {}
+
+	double get_side_a() const {
+		return side_a;
+	}
+
+	double get_side_b() const {
+		return side_b;
+	}
+
+	void set_side_a(double side_a) {
+		if (side_a < MIN_DIMENSION) side_a = MIN_DIMENSION;
+		if (side_a > MAX_DIMENSION) side_a = MAX_DIMENSION;
+		this->side_a = side_a;
+	}
+
+	void set_side_b(double side_b) {
+		if (side_b < MIN_DIMENSION) side_b = MIN_DIMENSION;
+		if (side_b > MAX_DIMENSION) side_b = MAX_DIMENSION;
+		this->side_b = side_b;
+	}
+
+	double get_height() const {
+		return (get_area() * 2) / side_b;
+	}
+
+	double get_area() const override {
+		return side_a * side_b;
+	}
+
+	double get_perimeter() const override {
+		return 2 * (side_a + side_b);
+	}
+
+	void draw() const override {
+		HWND hwnd = GetConsoleWindow();
+		HDC hdc = GetDC(hwnd);
+
+		HPEN hPen = CreatePen(PS_SOLID, line_width, color);
+		HBRUSH hBrush = CreateSolidBrush(color);
+
+		SelectObject(hdc, hPen);
+		SelectObject(hdc, hBrush);
+
+		POINT vertex[] =
+		{
+			{ start_x , start_y},
+			{ start_x +side_b, start_y},
+			{ start_x +side_b+side_a*(sqrt(3)/2), start_y+side_a},
+			{ start_x + side_a * (sqrt(3) / 2), start_y+side_a}
+		};
+
+		Polygon(hdc, vertex, 4);
+
+		DeleteObject(hPen);
+		DeleteObject(hBrush);
+
+		ReleaseDC(hwnd, hdc);
+	}
+
+	void info() const {
+		cout << typeid(*this).name() << endl;
+		cout << "Сторона A: " << side_a << endl;
+		cout << "Сторона B: " << side_b << endl;
+		cout << "Высота: " << get_height() << endl;
+		Shape::info();
+	}
+};
 
 void main()
 {
@@ -422,4 +499,7 @@ void main()
 
 	RightTriangle RT(150, 150, Color::white, 700, 300, 15);
 	RT.info();
+
+	Parallelogram parallelogram(70, 150, Color::blue, 700, 300, 15);
+	parallelogram.info();
 }
